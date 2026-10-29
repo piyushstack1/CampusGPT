@@ -1,0 +1,49 @@
+spring:
+  config:
+    import: optional:file:.env[.properties],optional:file:../.env[.properties]
+  profiles:
+    active: local
+  application:
+    name: campusgpt
+  datasource:
+    url: jdbc:h2:file:./data/campusgpt-local;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  ai:
+    openai:
+      api-key: local-not-used
+  autoconfigure:
+    exclude:
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiChatAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiEmbeddingAutoConfiguration
+      - org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration
+  servlet:
+    multipart:
+      max-file-size: ${MAX_UPLOAD_SIZE:20MB}
+      max-request-size: ${MAX_UPLOAD_SIZE:20MB}
+  flyway:
+    enabled: false
+server:
+  port: ${BACKEND_PORT:8081}
+campusgpt:
+  upload-dir: ${UPLOAD_DIR:./uploads-local}
+  frontend-origin: ${FRONTEND_ORIGIN:http://localhost:5173}
+  ollama:
+    base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+    chat-model: ${OLLAMA_CHAT_MODEL:llama3.2:3b}
+    embedding-model: ${OLLAMA_EMBEDDING_MODEL:nomic-embed-text}
+  rag:
+    chunk-size: ${CHUNK_SIZE:2600}
+    chunk-overlap: ${CHUNK_OVERLAP:350}
+    top-k: ${RETRIEVAL_TOP_K:3}
+    similarity-threshold: ${SIMILARITY_THRESHOLD:0.45}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

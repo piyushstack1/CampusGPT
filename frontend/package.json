@@ -1,0 +1,1 @@
+{"scripts":{"dev":"vite --host 0.0.0.0","build":"tsc && vite build","test":"vitest --run"},"dependencies":{"vite":"latest","typescript":"latest","react":"latest","react-dom":"latest","react-router-dom":"latest","axios":"latest","react-markdown":"latest","lucide-react":"latest"},"devDependencies":{"vitest":"latest","@types/react":"latest","@types/react-dom":"latest"}}

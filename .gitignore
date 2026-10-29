@@ -1,0 +1,14 @@
+.env
+.m2/
+.npm-cache/
+uploads/
+backend/data/
+backend/uploads-local/
+target/
+node_modules/
+dist/
+.idea/
+.vscode/
+apache-maven-3.9.9/
+apache-maven-3.9.9-bin.zip
+*.log
